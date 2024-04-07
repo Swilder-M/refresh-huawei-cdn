@@ -1,0 +1,25 @@
+name: 'Refresh Huawei CDN Cache'
+description: 'Refresh Huawei CDN Cache'
+inputs:
+  access_key_id:
+    description: 'Huawei Access ID'
+    required: true
+  access_key_secret:
+    description: 'Huawei Access Secret'
+    required: true
+  file_paths:
+    description: 'File Path'
+    required: true
+
+outputs:
+  result:
+    description: 'Result'
+    value: '{}'
+
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: |
+        pip3 install requests
+        python3 ${{ github.action_path }}/refresh_cdn_cache.py ${{ inputs.access_key_id }} ${{ inputs.access_key_secret }} ${{ inputs.file_paths }}
